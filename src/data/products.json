@@ -1,0 +1,69 @@
+
+[
+    {
+        "id": 1,
+        "name": "Termo Clásico Negro",
+        "description": "Termo de acero inoxidable con doble pared. Mantiene bebidas calientes por 12 horas y frías por 24 horas.",
+        "price": 299.99,
+        "image": "/images/products/termo-negro.jpg",
+        "category": "clasico",
+        "capacity": "500ml",
+        "stock": 5,
+        "featured": true
+    },
+    {
+        "id": 2,
+        "name": "Tumbler Rosa Pastel",
+        "description": "Tumbler con pajita incluida, perfecto para bebidas frías. Diseño elegante en rosa pastel.",
+        "price": 249.99,
+        "image": "/images/products/tumbler-rosa.jpg",
+        "category": "tumbler",
+        "capacity": "750ml",
+        "stock": 3,
+        "featured": true
+    },
+    {
+        "id": 3,
+        "name": "Termo Deportivo Verde",
+        "description": "Termo ideal para deportistas. Con tapa de fácil apertura y asa para transportar.",
+        "price": 349.99,
+        "image": "/images/products/termo-deportivo.jpg",
+        "category": "deportivo",
+        "capacity": "1L",
+        "stock": 8,
+        "featured": true
+    },
+    {
+        "id": 4,
+        "name": "Tumbler Floral",
+        "description": "Hermoso tumbler con diseño floral estampado. Incluye pajita reutilizable.",
+        "price": 279.99,
+        "image": "/images/products/tumbler-floral.jpg",
+        "category": "tumbler",
+        "capacity": "600ml",
+        "stock": 4,
+        "featured": true
+    },
+    {
+        "id": 5,
+        "name": "Termo Premium Plateado",
+        "description": "Termo premium con acabado metálico. Triple capa de aislamiento térmico.",
+        "price": 449.99,
+        "image": "/images/products/termo-premium.jpg",
+        "category": "premium",
+        "capacity": "500ml",
+        "stock": 15,
+        "featured": false
+    },
+    {
+        "id": 6,
+        "name": "Mini Termo Viajero",
+        "description": "Perfecto para llevar en el bolso. Tamaño compacto pero gran rendimiento térmico.",
+        "price": 199.99,
+        "image": "/images/products/termo-mini.jpg",
+        "category": "mini",
+        "capacity": "300ml",
+        "stock": 60,
+        "featured": false
+    }
+]

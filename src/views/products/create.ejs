@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <%- include ('../partials/header') %>
+    <main>
+        <div class="container page-content">
+            <div class="form-container">
+                <h1 class="form-title">Agregar producto</h1> 
+
+                <form action="/products" method="POST" class="form">
+
+                    <div class="form-group">
+                        <label class="form-label"> Nombre del producto</label>
+                        <input type="text" name="name" class="form-input" placeholder="Ej. Termo blanco deportivo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Descripción</label>
+                        <textarea name="description" class="form-input form-textarea" placeholder="Describe el producto..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Precio $</label>
+                            <input type="number" name="price" class="form-input" step="0.01" min="0" placeholder="299.99" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Capacidad</label>
+                            <input type="text" name="capacity" class="form-input" placeholder="500ml" required>
+                        </div>
+                    </div>
+
+                    <!-- Categoría y Stock -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Categoría</label>
+                            <select name="category" class="form-input" required>
+                                <option value="">Seleccione...</option>
+                                <option value="clasico">Clásico</option>
+                                <option value="tumbler">Tumbler</option>
+                                <option value="deportivo">Deportivo</option>
+                                <option value="premium">Premium</option>
+                                <option value="mini">Mini</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Stock</label>
+                            <input type="number" name="stock" class="form-input" min="0" placeholder="15" required>
+                        </div>
+                    </div>
+
+                    <!--Imagen-->
+                    <div class="form-group">
+                        <label class="form-label">URL de la imagen</label>
+                        <input type="text" name="name" class="form-input" placeholder="/images/products/mi-termo.jpg">
+                    </div>
+
+                    <!--Productos destacados-->
+                    <div class="checkbox-group">
+                        <input type="checkbox" name="featured" value="true" id="featured" class="checkbox">
+                        <label for="featured" class="checkbox-label">Marcar como producto destacado</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Guardar producto</button>
+                        <a href="/products"class="btn btn-outline">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>

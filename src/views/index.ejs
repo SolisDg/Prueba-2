@@ -1,0 +1,96 @@
+<!-- Página de inicio de Pretty Thermo-->
+
+<!DOCTYPE html>
+<html lang="es">
+<script src="/js/script.js"></script>
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<head>
+    <style src="styles.css"></style>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title"> 
+                    TU TERMO<br>
+                    <span class="text-lime">PERFECTO</span>
+                </h1>
+                <p class="hero-description">
+                    Descubre nuestra colección de termos de alta calidad. 
+                    Mantén tus bebidas a la temperatura ideal durante todo el día.
+                </p>
+                <a href="/products" class="btn btn-primary">
+                    VER PRODUCTOS
+                </a>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i data-lucide="clock" class="feature-icon"></i>
+                        <h3 class="feature-title">24h Temperatura</h3>
+                        <p class="feature-description">Mantiene frío o caliente</p>
+                    </div>
+                    <div class="feature-card">
+                        <i data-lucide="shield" class="feature-icon"></i>
+                        <h3 class="feature-title">Diseños</h3>
+                        <p class="feature-description">Los mejores diseños</p>
+                    </div>
+                    <div class="feature-card">
+                        <i data-lucide="truck" class="feature-icon"></i>
+                        <h3 class="feature-title">Stickers gratis</h3>
+                        <p class="feature-description">En todas tus compras</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de Productos Destacados -->
+        <section class="products-section">
+            <div class="container">
+                <h2 class="section-title">
+                    PRODUCTOS <span class="text-lime">DESTACADOS</span>
+                </h2>
+                <div class="products-grid">
+                    <!-- Mostrar productos dinámicamente -->
+                    <% if (typeof products !== 'undefined' && products.length > 0) { %>
+                        <% products.slice(0, 4).forEach(function(product) { %>
+                            <div class="product-card">
+                                <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+                                <h3 class="product-name"><%= product.name %></h3>
+                                <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                                <a href="/products/<%= product.id %>" class="btn btn-primary">Ver Detalle</a>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No hay productos disponibles.</p>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <h2 class="cta-title">
+                        ¿NUEVO EN <span class="text-lime">PRETTY THERMO</span>?
+                    </h2>
+                    <p class="cta-description">
+                        ¡Regístrate y guarda tus favoritos!
+                    </p>
+                    <a href="/register" class="btn btn-secondary">CREAR CUENTA</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include('partials/footer') %>
+
+
+</body>
+</html>

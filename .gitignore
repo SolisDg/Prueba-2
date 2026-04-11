@@ -1,0 +1,27 @@
+
+# Dependencias
+node_modules/
+
+# Variables de entorno (¡IMPORTANTE!)
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+
+# Archivos subidos por usuarios
+public/images/products/
+public/images/users/
+!public/images/products/.gitkeep
+!public/images/users/.gitkeep
+

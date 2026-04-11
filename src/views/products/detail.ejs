@@ -1,0 +1,70 @@
+<!-- Detalles del producto-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head') %>
+</head>
+<body>
+    <%-include('../partials/header') %>
+    <main>
+        <div class="container page-content">
+            <div class="product-detail">
+                <!--Imagen del producto-->
+                <div class="product-detail-image">
+                    <img src="<%= product.image %>" alt="<%= product.name %>"> 
+                </div>
+
+                <div class="product-detail-info">
+                    <span class="product-category-badge"><%= product.category %></span>
+                    <h1 class="product-detail-name"><%= product.name %></h1>
+                    <p class="product-detail-price">$<%= product.price.toFixed(2) %></p>
+                    
+                    <p class="product-detail-description">
+                        <%= product.description %>
+                    </p>
+                    
+                    <!-- Especificaciones -->
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Capacidad:</span>
+                            <span class="spec-value"><%= product.capacity %></span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Stock:</span>
+                            <span class="spec-value"><%= product.stock %> unidades</span>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary">
+                            <i data-lucide="shopping-cart"></i>
+                            Agregar al carrito
+                        </button>
+                        <button class="btn btn-outline">
+                            <i data-lucide="heart"></i>
+                            Favoritos 💕
+                        </button>
+                    </div>
+                    
+                    <!-- Acciones de administrador -->
+                    <div class="admin-actions">
+                        <a href="/products/<%= product.id %>/edit" class="btn btn-secondary">
+                            Editar ✏️
+                        </a>
+                        <form action="/products/<%= product.id %>?_method=DELETE" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto? ⁉️')">
+                                Eliminar 🗑️
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <a href="/products" class="back-link">⬅️ Volver a productos</a>
+        </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+</body>
+</html>
