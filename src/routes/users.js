@@ -4,10 +4,14 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
-const usersController = require('../controllers/usersControllers');
+const usersController = require('../controllers/usersController');
 
 const authMiddleware = require('../middlewares/authMiddleware');
 const guestMiddleware = require('../middlewares/guestMiddleware');
+
+const registerValidation = 
+require('../middlewares/validations/registerValidation');
+const loginValidation = require('../middlewares/validations/loginValidation');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -20,32 +24,43 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({
-    storage,
-    fileFilter: (req, file, cb) => {
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if(allowedTypes.includes(file.mimetype)) {
-            cb(null, true);
-        } else {
-            cb(new Error('Tipo de archivo no permitido'), false);
-        }
-    }
-});
-
-//Rutas sin login
-router.get('/registro', guestMiddleware, 
-usersController.registerForm);
-
-router.post('/registro', guestMiddleware, upload.single('avatar'), 
-usersController.register);
-
-router.get('/login', guestMiddleware, usersController.loginForm);
-
-router.post('/login', guestMiddleware, usersController.login);
+const upload = multer({storage});
+router.get(
+    '/register',
+    guestMiddleware,        //Si no está logueado
+    usersController.showRegister
+);
+router.post(
+    '/register',
+    guestMiddleware,        // Si no está logueado
+    upload.single('avatar'),    
+    registerValidation,   
+    usersController.processRegister
+    );
 
 //Rutas que requieren login
-router.get('/perfil', authMiddleware, usersController.profile);
+router.get(
+    '/login',
+    guestMiddleware,
+    usersController.showLogin
+);
 
-router.get('/logout', authMiddleware, usersController.logout);
+router.post(
+    '/login',
+    guestMiddleware,
+    loginValidation,         
+    usersController.processLogin
+);
 
+//Rutas del perfil
+router.get(
+    '/profile',
+    authMiddleware,          
+    usersController.profile
+);
+
+router.get(
+    '/logout',
+    usersController.logout
+);
 module.exports = router;

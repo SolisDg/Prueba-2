@@ -2,10 +2,10 @@
 
 const {Product, Category}= require('../database/models');
 const {Op} = require('sequelize');
-const productsControlers = {
+const productsController = {
     index: async (req, res) => {
         try {
-        const products = await Products.findAll({
+        const products = await Product.findAll({
             where: {active:true},
             include: [{
                 model: Category,
@@ -26,7 +26,7 @@ const productsControlers = {
     detail: async (req, res) => {
         try {
         const {id} = req.params;
-        const product = await Product.findById(id, {
+        const product = await Product.findByPk(id, {
             include: [{
                 model: Category,
                 as: 'category'
@@ -96,7 +96,7 @@ const productsControlers = {
     edit: async (req, res) => {
         try {
         const {id} = req.params;
-        const product = await Product.findById(id);
+        const product = await Product.findByPk(id);
 
         if (!product) {
             return res.status(404).render('error 404', {
@@ -123,7 +123,7 @@ const productsControlers = {
         const {name, description, price, stock, color, capacity, categoryId, featured} = req.body;
         const product = await Product.findByPk(id);
         
-        if (!Product) {
+        if (!product) {
             return res.status(404).render('error 404', {
                 message: 'Producto no encontrado 😔'
             });
@@ -142,7 +142,7 @@ const productsControlers = {
             updateData.image = req.file.filename;
         }
         await product.update(updateData);
-        res.redirect('/products/${id}');
+        res.redirect(`/products/${id}`);
     } catch (error) {
         console.error('Error al actualizar:', error);
         res.redirect(`/products/${req.params.id}/edit`);
@@ -154,7 +154,7 @@ const productsControlers = {
         const {id} = req.params;
         const product = await Product.findByPk(id);
         
-        if (!products) {
+        if (!product) {
             return res.status(404).render('error 404', {
                 message: 'Producto no encontrado 😔'
             });
@@ -170,7 +170,7 @@ const productsControlers = {
 search: async (req, res) => {
     try{
         const {q} = req.query;
-        const products = await Products.findAll({
+        const products = await Product.findAll({
             where: {
                 active: true,
                 [Op.or]: [
@@ -193,4 +193,4 @@ search: async (req, res) => {
 
 };
 
-module.export = productController;
+module.exports = productsController;

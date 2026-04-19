@@ -55,7 +55,7 @@ app.use((req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en http://localhost:3300`);
     console.log(`¡Pretty Thermo está listo!`);
 });
 
