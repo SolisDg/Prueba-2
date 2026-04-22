@@ -10,35 +10,35 @@ module.exports = {
       {
         name: 'Termos clásicos',
         description: 'Termos tradicionales para bebidas calientes o frías',
-        image: 'categoria-clasicos.png',
+        image: 'bottle_black_lime_06.jpg',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Tumblers',
         description: 'Vasos térmicos con tapa para llevar',
-        image: 'categoria-tumblers.png',
+        image: 'tumbler_black_multicolor_10.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Botellas Deportivas',
         description: 'Botellas ideales para actividades físicas',
-        image: 'categoria-deportivas.png',
+        image: 'bottle_white_04.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Termos Infantiles',
         description: 'Diseños divertidos para los más pequeños',
-        image: 'categoria-infantiles.png',
+        image: 'tumbler_pink_lime_05.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Accesorios',
         description: 'Tapas, popotes y otros accesorios',
-        image: 'categoria-accesorios.png',
+        image: 'tumbler_pink_03.png',
         createdAt: new Date(),
         updatedAt: new Date()
       }

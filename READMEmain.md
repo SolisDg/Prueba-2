@@ -17,4 +17,4 @@ Explanation:
  Site 5: I put it last, but the true is that they where my firts inspiration, Snoopy is very charismatic, for copyright reasons I couldn't put him on the logo, but still, the site could give some clues to proced
 
  Aditional coments:
-    .
+    Hi, at the moment I installed react-router-dom, were found 26 vulnerabilities, so I decided to stop working on the project here, you can already see the dashboard in the repository, I hope you understand the situation, I'll be waiting for the feedback, thank you.
