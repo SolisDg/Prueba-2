@@ -7,24 +7,38 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 
+const cors = require ('cors');
+
 require('dotenv').config();
 
 const app = express();
 
+
 const PORT = process.env.PORT || 3300;
+
+app.use(cors({
+    // Origen React
+    origin: 'http://localhost:3001',
+    // Métodos HTTP permitidos
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    // Permitir envío de cookies (si usas autenticación)
+    credentials: true
+}));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
-
+//Para parsear datos de formularios:
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
+//Archivos estáticos:
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'prettythermo_secret_key_2026',
+    secret: 'prettythermo_secret_key_2026',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -39,7 +53,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
+//Rutas de vistas EJS
 const mainRoutes = require('./src/routes/main');
 const productsRoutes = require('./src/routes/products');
 const userRoutes = require('./src/routes/users');
@@ -47,6 +65,15 @@ const userRoutes = require('./src/routes/users');
 app.use('/', mainRoutes);
 app.use('/products', productsRoutes);
 app.use('/users', userRoutes);
+
+//Rutas de API
+const apiProductsRoutes = require('./routes/api/products');
+const apiUsersRoutes = require('./routes/api/users');
+const apiCategoriesRoutes = require('./routes/api/categories');
+
+app.use('/api/products', apiProductsRoutes);
+app.use('/api/users', apiUsersRoutes);
+app.use('/api/categories', apiCategoriesRoutes);
 
 app.use((req, res) => {
     res.status(404).render('404', { message: 'Página no encontrada' });
@@ -57,5 +84,6 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:3300`);
     console.log(`¡Pretty Thermo está listo!`);
+    console.log(`API disponible en http://localhost:${PORT}/api`);
 });
 
