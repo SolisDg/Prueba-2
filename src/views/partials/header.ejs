@@ -1,61 +1,34 @@
 <!-- Barra de navegación de la página -->
 
-<header class = "header">
-    <div class = "container">
-        <div class = "header-content">
+<header class="header">
+    <div class="header-container">
+        <a href="/" class="logo">
+            <img src="/images/favicon.ico.png" alt="Pretty-Thermo">
+            <span>PRETTY THERMO</span>
+        </a>
 
-            <a href = "/" class = "logo">
-                <img src="/images/favicon.ico.png" alt="Pretty-Thermo" class="logo-img">
-                <span class="logo-text"> PRETTY THERMO </span>
+        <nav class="nav-menu">
+            <a href="/">Inicio</a>
+            <a href="/products">Productos</a>
+            
+            <% if (typeof userSession !== 'undefined' && userSession) { %>
+                <div class="user-menu">
+                    <img src="/images/users/<%= userSession.avatar %>" alt="Avatar" class="avatar-small" style="width: 30px; height: 30px; border-radius: 50%;">
+                    <span>Hola, <%= userSession.name %></span>
+                    <a href="/users/profile">Mi Perfil</a>
+                    <a href="/users/logout">Salir</a>
+                </div>
+            <% } else { %>
+                <a href="/users/login" class="btn btn-outline">Login</a>
+                <a href="/users/register" class="btn btn-primary">Registro</a>
+            <% } %>
+
+            <a href="/favorites" class="icon-btn">
+                <i data-lucide="heart"></i>
             </a>
-            <nav class="navbar">
-                <div class="nav-brand">
-                    <a href="/">Pretty Thermo</a>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/productos">Productos</a></li>
-                </ul>
-                <div class="nav-user">
-                <%# Si hay usuario logueado %>
-                    <% if (userSession) { %>
-                        <div class="user-menu">
-                            <img src="/images/users/<%= userSession.avatar %>" 
-                            alt="Avatar" class="avatar-small">
-                            <span>Hola, <%= userSession.firstName %></span>
-                            <div class="dropdown">
-                                <a href="/usuarios/perfil">Mi Perfil</a>
-                                <% if (userSession.role === 'admin') { %>
-                                    <a href="/admin">Panel Admin</a>
-                                <% } %> 
-                                <a href="/usuarios/logout">Cerrar Sesión</a>
-                            </div>
-                        </div>
-                    <% } else { %>
-                        <%# Si NO hay usuario logueado %>
-                        <a href="/usuarios/login" class="btn btn-outline">Iniciar Sesión</a>
-                        <a href="/usuarios/registro" class="btn btn-primary">Registrarse</a>
-                    <% } %>
-                </div>
-            </nav>
-
-            <div class="header actions">
-
-                <a href="/favorites" class="icon-btn favorites-btn">
-                    <i data-lucide="heart"></i>
-                    <span class="favorites-badge" id="favorites-count">0</span>
-                </a>
-
-                <a href="/login" class="icon-btn">
-                    <i data-lucide="user"></i>
-                </a>
-
-                <a href="/cart" class="icon-btn cart-btn">
-                    <i data-lucide="shopping-cart"></i>
-                    <span class="cart-badge" id="cart-count">0</span>
-                </a>
-
-            </div>
-        </div>
+            <a href="/cart" class="icon-btn">
+                <i data-lucide="shopping-cart"></i>
+            </a>
+        </nav>
     </div>
 </header>

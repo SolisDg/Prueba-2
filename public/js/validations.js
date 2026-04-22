@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (event) => {
             let isValid = true;
             if(!validateEmail(emailInput)) isValid = false;
-            if(!validateRequired(passwordInput, 'La contraseña es obligatoria')) isValid = false;
+            if(!validateRequired(password, 'La contraseña es obligatoria')) isValid = false;
             if(!isValid) {
                 event.preventDefault();
             }
@@ -89,7 +89,7 @@ function validateName(input) {
         showError(input, 'El nombre debe tener al menos 2 caracteres');
         return false;
     }
-    showSucess(input);
+    showSuccess(input);
     return true;
 }
 
@@ -104,7 +104,7 @@ function validateEmail(input) {
         showError(input, 'Ingresa un email válido');
         return false;
     }
-    showSucess(input);
+    showSuccess(input);
     return true;
 }
 
@@ -121,14 +121,14 @@ function validatePassword(input) {
     const hasLower = /[a-z]/.test(value);
     const hasUpper = /[A-Z]/.test(value);
     const hasNumber = /\d/.test(value);
-    const hasSpecial = /[@$!%*?&]/.test(value);
+    const hasSpecial = /[@$!%*?&#.]/.test(value);
     
     if (!hasLower || !hasUpper || !hasNumber || !hasSpecial) {
         let missing = [];
         if (!hasLower) missing.push('minúscula');
         if (!hasUpper) missing.push('mayúscula');
         if (!hasNumber) missing.push('número');
-        if (!hasSpecial) missing.push('carácter especial (@$!%*?&)');
+        if (!hasSpecial) missing.push('carácter especial (@$!%*?&#.)');
         
         showError(input, `Falta: ${missing.join(', ')}`);
         return false;
@@ -184,13 +184,13 @@ function validateRequired(input, message) {
     return true;
 }
 
-function validateLength(input, minLenght, message) {
+function validateLength(input, minLength, message) {
     const value = input.value.trim();
-    if (value.lenght < minLenght) {
+    if (value.length < minLength) {
         showError(input, message);
         return false;
     }
-    showSucess(input);
+    showSuccess(input);
     return true;
 }
 

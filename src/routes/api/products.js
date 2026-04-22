@@ -1,7 +1,7 @@
 //Rutas de la Api, productos
 
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 
 const productsApiController = require('../../controllers/api/productsApiController');
 
@@ -11,7 +11,7 @@ const productsApiController = require('../../controllers/api/productsApiControll
 router.get('/', productsApiController.list);
 
 //Obtener producto por id
-router.get('/', productsApiController.detail);
+router.get('/:id', productsApiController.detail);
 
 //Crear un nuevo producto:
 router.post('/', productsApiController.create);
@@ -20,6 +20,6 @@ router.post('/', productsApiController.create);
 router.put('/:id', productsApiController.update);
 
 //Eliminar un producto:
-router.delete('/:id', productsApiController.delete);
+router.delete('/:id', productsApiController.destroy);
 
 module.exports = router;

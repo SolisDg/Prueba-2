@@ -2,21 +2,28 @@
 /*@type {import('sequelize-cli').Migration}*/
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     */
+    const categories = await queryInterface.sequelize.query(
+      `SELECT id, name FROM categories;`
+    );
+    const categoryRows = categories[0];
+    
+    const getCategoryId = (name) => {
+      const category = categoryRows.find(c => c.name === name);
+      return category ? category.id : null;
+    };
+
     await queryInterface.bulkInsert('products', [
       {
         name: 'Termo Rosa Brillante',
         description: 'Hermoso termo de acero inoxidable en color rosa brillante. Mantiene bebidas calientes por 12 horas y frías por 24 horas.',
         price: 349.99,
-        image: 'termo-rosa.pgn',
+        image: 'tumbler_pink_03.jpg',
         stock: 50,
         color: 'Rosa',
         capacity: '500ml',
         featured: true,
         active: true,
-        categoryId: 1,
+        categoryId: getCategoryId('Termos clásicos'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -24,13 +31,13 @@ module.exports = {
         name: 'Tumbler Menta',
         description: 'Tumbler con tapa de bambú y popote reutilizable. Perfecto para smoothies y bebidas frías.',
         price: 279.99,
-        image: 'tumbler-menta.png',
+        image: 'tumbler_white_pink_ombre_09.jpg',
         stock: 30,
         color: 'Menta',
         capacity: '750ml',
         featured: true,
         active: true,
-        categoryId: 2,
+        categoryId: getCategoryId('Tumblers'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -38,13 +45,13 @@ module.exports = {
         name: 'Botella Deportiva Pro',
         description: 'Botella deportiva con boquilla especial anti-derrames. Ideal para el gimnasio.',
         price: 199.99,
-        image: 'botella-deportiva.png',
+        image: 'bottle_black_lime_06.jpg',
         stock: 100,
         color: 'Negro',
         capacity: '1L',
         featured: false,
         active: true,
-        categoryId: 3,
+        categoryId: getCategoryId('Botellas Deportivas'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -52,13 +59,13 @@ module.exports = {
         name: 'Termo Unicornio Kids',
         description: 'Termo infantil con diseño de unicornio. Incluye funda protectora y correa.',
         price: 249.99,
-        image: 'termo-unicornio.png',
+        image: 'tumbler_pink_lime_05.jpg',
         stock: 25,
         color: 'Multicolor',
         capacity: '350ml',
         featured: true,
         active: true,
-        categoryId: 4,
+        categoryId: getCategoryId('Termos Infantiles'),
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -66,13 +73,13 @@ module.exports = {
         name: 'Set de Popotes Reutilizables',
         description: 'Set de 4 popotes de acero inoxidable con cepillo limpiador.',
         price: 89.99,
-        image: 'popotes-set.png',
+        image: 'bottle_white_04.jpg',
         stock: 200,
         color: 'Plateado',
         capacity: null,
         featured: false,
         active: true,
-        categoryId: 5,
+        categoryId: getCategoryId('Accesorios'),
         createdAt: new Date(),
         updatedAt: new Date()
       }

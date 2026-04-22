@@ -20,7 +20,10 @@ const productsController = {
         });
     } catch (error) {
         console.error('Error al obtener productos:', error);
-        res.render('error', {message: 'Error al cargar los productos'});
+        res.render('error', {
+            title: 'Error - Pretty Thermo',
+            message: 'Error al cargar los productos'
+        });
     }
 },
     detail: async (req, res) => {
@@ -34,7 +37,8 @@ const productsController = {
         });
         
         if (!product) {
-            return res.status(404).render('error 404', {
+            return res.status(404).render('404', {
+                title: 'No Encontrado - Pretty Thermo',
                 message: 'Producto no encontrado 😔'
             });
         }
@@ -46,7 +50,10 @@ const productsController = {
         });
     }catch (error) {
         console.error('Error al obtener producto:', error);
-        res.render('error', {message: 'Error al cargar el producto'});
+        res.render('error', {
+            title: 'Error - Pretty Thermo',
+            message: 'Error al cargar el producto'
+        });
     }
 },
 
@@ -54,6 +61,7 @@ const productsController = {
         try{
         const categories = await Category.findAll();
         res.render('products/create', {
+            title: 'Crear Producto - Pretty Thermo',
             categories,
             message: 'Crear Producto'
             
@@ -86,6 +94,7 @@ const productsController = {
         console.error('Error al crear producto:', error);
         const categories = await Category.findAll();
         res.render('products/create', {
+            title: 'Crear Producto - Pretty Thermo',
             categories,
             errors: [{ msg: 'Error al crear el producto'}],
             old: req.body
@@ -99,7 +108,8 @@ const productsController = {
         const product = await Product.findByPk(id);
 
         if (!product) {
-            return res.status(404).render('error 404', {
+            return res.status(404).render('404', {
+                title: 'No Encontrado - Pretty Thermo',
                 message: 'Producto no encontrado 😔'
             });
         }
@@ -124,7 +134,8 @@ const productsController = {
         const product = await Product.findByPk(id);
         
         if (!product) {
-            return res.status(404).render('error 404', {
+            return res.status(404).render('404', {
+                title: 'No Encontrado - Pretty Thermo',
                 message: 'Producto no encontrado 😔'
             });
         }
@@ -155,7 +166,8 @@ const productsController = {
         const product = await Product.findByPk(id);
         
         if (!product) {
-            return res.status(404).render('error 404', {
+            return res.status(404).render('404', {
+                title: 'No Encontrado - Pretty Thermo',
                 message: 'Producto no encontrado 😔'
             });
         }

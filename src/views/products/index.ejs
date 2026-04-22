@@ -27,14 +27,14 @@
                     <% products.forEach(function(product) { %>
                         <div class="product-card">
                             <img 
-                                src="<%= product.image %>" 
+                                src="/images/<%= product.image %>" 
                                 alt="<%= product.name %>" 
                                 class="product-image"
                             >
                             <div class="product-info">
                                 <h3 class="product-name"><%= product.name %></h3>
-                                <p class="product-category"><%= product.category %></p>
-                                <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                                <p class="product-category"><%= product.category ? product.category.name : 'Sin categoría' %></p>
+                                <p class="product-price">$<%= Number(product.price).toFixed(2) %></p>
                                 <a href="/products/<%= product.id %>" class="btn btn-primary">
                                     Ver detalles
                                 </a>

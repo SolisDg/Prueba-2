@@ -37,6 +37,11 @@ app.use(methodOverride('_method'));
 //Archivos estáticos:
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
 app.use(session({
     secret: 'prettythermo_secret_key_2026',
     resave: false,
@@ -55,7 +60,7 @@ app.use((req, res, next) => {
 
 // EJS
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 //Rutas de vistas EJS
 const mainRoutes = require('./src/routes/main');
@@ -67,16 +72,19 @@ app.use('/products', productsRoutes);
 app.use('/users', userRoutes);
 
 //Rutas de API
-const apiProductsRoutes = require('./routes/api/products');
-const apiUsersRoutes = require('./routes/api/users');
-const apiCategoriesRoutes = require('./routes/api/categories');
+const apiProductsRoutes = require('./src/routes/api/products');
+// const apiUsersRoutes = require('./src/routes/api/users');
+// const apiCategoriesRoutes = require('./src/routes/api/categories');
 
 app.use('/api/products', apiProductsRoutes);
-app.use('/api/users', apiUsersRoutes);
-app.use('/api/categories', apiCategoriesRoutes);
+// app.use('/api/users', apiUsersRoutes);
+// app.use('/api/categories', apiCategoriesRoutes);
 
 app.use((req, res) => {
-    res.status(404).render('404', { message: 'Página no encontrada' });
+    res.status(404).render('404', { 
+        title: '404 - No Encontrado',
+        message: 'Página no encontrada' 
+    });
 });
 
 
@@ -86,4 +94,7 @@ app.listen(PORT, () => {
     console.log(`¡Pretty Thermo está listo!`);
     console.log(`API disponible en http://localhost:${PORT}/api`);
 });
+
+setInterval(() => {}, 1000);
+
 

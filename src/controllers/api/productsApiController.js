@@ -16,11 +16,11 @@ const productsApiController = {
                 include: [{model: Category, as: 'category'}],
                 limit: limit,
                 offset: offset,
-                order: [['creatdAt', 'DESC']]
+                order: [['createdAt', 'DESC']]
             });
             const baseUrl = `${req.protocol}://${req.get('host')}/api/products`;
 
-            const responde = {
+            const response = {
                 status: 'sucess',
                 count: totalProducts,
                 countThisPage: products.length,

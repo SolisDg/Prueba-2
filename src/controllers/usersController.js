@@ -6,31 +6,44 @@ const bcrypt = require('bcryptjs');
 const usersController = {
     showRegister: (req, res) => {
         res.render('users/register', {
+            title: 'Crear Cuenta - Pretty Thermo',
             errors: [],
             old: {}
         });
     },
     processRegister: async (req, res) => {
         const errors = validationResult(req);
+        console.log('--- Intentando registro ---');
+        console.log('Body:', req.body);
+        console.log('File:', req.file);
+
         if (!errors.isEmpty()){
+            console.log('Errores de validación:', errors.mapped());
             return res.render('users/register', {
+                title: 'Crear Cuenta - Pretty Thermo',
                 errors: errors.mapped(),
                 old: req.body
             });
         }
         try {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
-            await User.create ({
-                name: req.body.name,
-                email: req.body.mail,
-                password: hashedPassword,
-                avatar: req.file ? req.file.filename : 'defaul-avatar.png'
+            const nameParts = req.body.name.split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.slice(1).join(' ') || '.';
+
+            await User.create({
+                firstName: firstName,
+                lastName: lastName,
+                email: req.body.email,
+                password: req.body.password, // El hook beforeCreate en el modelo se encarga de hashear
+                avatar: req.file ? req.file.filename : 'default-avatar.png'
             });
+            console.log('Usuario creado con éxito');
             res.redirect('/users/login');
         } catch (error) {
-            console.error(error);
+            console.error('Error en User.create:', error);
             res.render('users/register', {
-                errors: { general: {msg: 'Error al crear el usuario'}},
+                title: 'Crear Cuenta - Pretty Thermo',
+                errors: { general: {msg: 'Error al crear el usuario. Intenta de nuevo.'}},
                 old: req.body
             });
         }
@@ -38,6 +51,7 @@ const usersController = {
 
     showLogin: (req, res) => {
         res.render('users/login', {
+            title: 'Iniciar Sesión - Pretty Thermo',
             errors: [],
             old: {}
         });
@@ -48,17 +62,19 @@ const usersController = {
         
         if (!errors.isEmpty()) {
             return res.render('users/login', {
+                title: 'Iniciar Sesión - Pretty Thermo',
                 errors: errors.mapped(),
                 old: req.body
             });
         }
         const user = req.userFound;
-        req.session.user = {
+        req.session.userLogged = {
             id: user.id,
-            name: user.name,
+            name: user.firstName,
             email: user.email,
             avatar: user.avatar
         };
+        res.redirect('/users/profile');
         if (req.body.remember) {
             res.cookie('userEmail', user.email, {
                 maxAge: 1000 * 60 * 60 * 24 * 14
@@ -69,6 +85,7 @@ const usersController = {
 
     profile: (req, res) => {
         res.render('users/profile', {
+            title: 'Mi Perfil - Pretty Thermo',
             user: req.session.user || req.session.userLogged
         });
     },
