@@ -34,6 +34,12 @@ const mainController = {
             title: 'Crear Cuenta - Pretty Thermo',
             currentPage: 'register'
         });
+    },
+    cart: (req, res) => {
+        res.render('cart', {
+            title: 'Carrito de Compras - Pretty Thermo',
+            currentPage: 'cart'
+        });
     }
 };
 

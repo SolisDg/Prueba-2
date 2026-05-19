@@ -16,5 +16,20 @@ Explanation:
  Site 4: Recently they got a boom in sales, in part because of their prices, but I think than even the site could have something that makes people whant to shop
  Site 5: I put it last, but the true is that they where my firts inspiration, Snoopy is very charismatic, for copyright reasons I couldn't put him on the logo, but still, the site could give some clues to proced
 
+
+WIREFRAMES LINK:
+Figma: https://www.figma.com/design/jAcYel0RZH0Zn057S0xfd2/Untitled?node-id=0-1&t=JYYOg3HjnPqbWmOO-1 
+
  Aditional coments:
-    Hi, at the moment I installed react-router-dom, were found 26 vulnerabilities, so I decided to stop working on the project here, you can already see the dashboard in the repository, I hope you understand the situation, I'll be waiting for the feedback, thank you.
+    Corrections done, I'll wait for another review. Thank you!
+
+Technologies:
+   Database: MySQL
+   ORM: Sequelize
+   Environment: Node.js, Javascript
+   Framework: Express.js
+   Autentication: bcrypt, express-session, express-validator
+   Frontend: React.js, Javascript
+   Templates: EJS
+   Uploads: Multer
+   Others: HTML, CSS

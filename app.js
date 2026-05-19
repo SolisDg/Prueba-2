@@ -34,7 +34,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 app.use(methodOverride('_method'));
-//Archivos estáticos:
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
@@ -73,12 +73,12 @@ app.use('/users', userRoutes);
 
 //Rutas de API
 const apiProductsRoutes = require('./src/routes/api/products');
-// const apiUsersRoutes = require('./src/routes/api/users');
-// const apiCategoriesRoutes = require('./src/routes/api/categories');
+const apiUsersRoutes = require('./src/routes/api/users');
+const apiCategoriesRoutes = require('./src/routes/api/categories');
 
 app.use('/api/products', apiProductsRoutes);
-// app.use('/api/users', apiUsersRoutes);
-// app.use('/api/categories', apiCategoriesRoutes);
+app.use('/api/users', apiUsersRoutes);
+app.use('/api/categories', apiCategoriesRoutes);
 
 app.use((req, res) => {
     res.status(404).render('404', { 

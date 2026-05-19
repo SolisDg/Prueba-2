@@ -34,7 +34,7 @@ const usersController = {
                 firstName: firstName,
                 lastName: lastName,
                 email: req.body.email,
-                password: req.body.password, // El hook beforeCreate en el modelo se encarga de hashear
+                password: req.body.password, 
                 avatar: req.file ? req.file.filename : 'default-avatar.png'
             });
             console.log('Usuario creado con éxito');
