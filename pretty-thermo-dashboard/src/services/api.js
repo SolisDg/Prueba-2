@@ -1,11 +1,11 @@
 //Servicio de API
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = 'http://localhost:3300/api';
 
 async function fetchAPI(endpoint, options = {}) {
     const defaultOptions = {
         headers: {
-            'Content-Type': 'applications/json'
+            'Content-Type': 'application/json'
         }
     };
     const finalOptions = {
@@ -25,7 +25,7 @@ async function fetchAPI(endpoint, options = {}) {
 }
 
 //Funciones de productos:
-export const getProduct = async(page = 1, limit = 10) => {
+export const getProducts = async(page = 1, limit = 10) => {
     return fetchAPI(`/products?page=${page}&limit=${limit}`);
 };
 

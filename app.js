@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3300;
 
 app.use(cors({
     // Origen React
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3001', 'http://localhost:3000'],
     // Métodos HTTP permitidos
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     // Permitir envío de cookies (si usas autenticación)

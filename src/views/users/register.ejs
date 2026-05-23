@@ -71,6 +71,15 @@
                         <small class="error-message"><%= errors.confirmPassword.msg %></small>
                     <% } %>
                 </div>
+                <% if (typeof userSession !== 'undefined' && userSession && userSession.role === 'admin') { %>
+                <div class="form-group">
+                    <label for="role" class="form-label">Rol del usuario</label>
+                    <select name="role" id="role" class="form-control" style="background-color: white; border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+                        <option value="user">Usuario normal</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                <% } %>
                 
                 <div class="form-group">
                     <label for="avatar" class="form-label">Foto de perfil</label>

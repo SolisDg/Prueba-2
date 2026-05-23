@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const productsApiController = require('../../controllers/api/productsApiController');
+const adminMiddleware = require('../../middlewares/adminMiddleware');
 
 //Endpoints
 
@@ -14,12 +15,12 @@ router.get('/', productsApiController.list);
 router.get('/:id', productsApiController.detail);
 
 //Crear un nuevo producto:
-router.post('/', productsApiController.create);
+router.post('/', adminMiddleware, productsApiController.create);
 
 //Actualizar un producto:
-router.put('/:id', productsApiController.update);
+router.put('/:id', adminMiddleware, productsApiController.update);
 
 //Eliminar un producto:
-router.delete('/:id', productsApiController.destroy);
+router.delete('/:id', adminMiddleware, productsApiController.destroy);
 
 module.exports = router;

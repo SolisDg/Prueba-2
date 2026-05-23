@@ -7,6 +7,7 @@ const path = require('path');
 const productsController = require ('../controllers/productsController');
 
 const authMiddleware = require('../middlewares/authMiddleware');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
 const productValidation = require('../middlewares/validations/productValidation');
 
@@ -26,19 +27,19 @@ router.get('/', productsController.index);
 router.get('/search', productsController.search);
 
 //Rutas CRUD
-router.get('/create', authMiddleware, productsController.create);
-router.post('/create', authMiddleware, upload.single('image'), 
+router.get('/create', adminMiddleware, productsController.create);
+router.post('/create', adminMiddleware, upload.single('image'), 
     productValidation, productsController.store
 );
 
 router.get('/:id', productsController.detail);
 
-router.get('/:id/edit', authMiddleware, productsController.edit);
-router.put('/:id', authMiddleware, upload.single('image'),
+router.get('/:id/edit', adminMiddleware, productsController.edit);
+router.put('/:id', adminMiddleware, upload.single('image'),
     productValidation, productsController.update
 );
 
-router.delete('/:id', authMiddleware, productsController.destroy);
+router.delete('/:id', adminMiddleware, productsController.destroy);
 
 module.exports = router;
 

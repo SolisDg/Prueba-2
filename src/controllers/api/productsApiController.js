@@ -1,6 +1,6 @@
 //Controlador de la Api, productos
 
-const { Product, Category, Color } = require('../../database/models');
+const { Product, Category } = require('../../database/models');
 const productsApiController = {
     //Listar productos con paginación:
     list: async (req, res) =>{
@@ -52,8 +52,7 @@ const productsApiController = {
             const {id} = req.params;
             const product = await Product.findByPk(id, {
                 include: [
-                    {model: Category, as: 'category'},
-                    {model: Color, as: 'colors'}
+                    {model: Category, as: 'category'}
                 ]
             });
             if (!product) {
@@ -76,11 +75,6 @@ const productsApiController = {
                         id: product.category.id,
                         name: product.category.name
                     } : null,
-                    colors: product.colors.map(c => ({
-                        id: c.id,
-                        name: c.name,
-                        hex: c.hex
-                    })),
                     createdAt: product.createdAt,
                     updatedAt: product.updatedAt
                 }

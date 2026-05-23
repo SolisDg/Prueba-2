@@ -7,7 +7,7 @@ import './Dashboard.css';
 
 function Dashboard() {
     const [stats, setStats] = useState({
-        totalProduct: 0,
+        totalProducts: 0,
         totalUsers: 0,
         totalCategories: 0
     });
@@ -19,15 +19,15 @@ function Dashboard() {
     useEffect(() => {
         async function fetchData(){
             try {
-                const [productData, usersData, categoriesData] = await Promise.all([
+                const [productsData, usersData, categoriesData] = await Promise.all([
                     getProducts(1, 1),
                     getUsers(1,1),
                     getCategories()
                 ]);
                 setStats({
-                    totalProduct: productsData.count,
+                    totalProducts: productsData.count,
                     totalUsers: usersData.count,
-                    totalCategories: categoriesData.categories.length
+                    totalCategories: categoriesData.count || categoriesData.categories.length
                 });
                 if (productsData.products.length > 0){
                     setLastProduct(productsData.products[0]);

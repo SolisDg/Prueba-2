@@ -30,12 +30,18 @@ const usersController = {
             const firstName = nameParts[0];
             const lastName = nameParts.slice(1).join(' ') || '.';
 
+            let userRole = 'user';
+            if (req.session && req.session.userLogged && req.session.userLogged.role === 'admin' && req.body.role === 'admin') {
+                userRole = 'admin';
+            }
+
             await User.create({
                 firstName: firstName,
                 lastName: lastName,
                 email: req.body.email,
                 password: req.body.password, 
-                avatar: req.file ? req.file.filename : 'default-avatar.png'
+                avatar: req.file ? req.file.filename : 'default-avatar.png',
+                role: userRole
             });
             console.log('Usuario creado con éxito');
             res.redirect('/users/login');
@@ -72,7 +78,8 @@ const usersController = {
             id: user.id,
             name: user.firstName,
             email: user.email,
-            avatar: user.avatar
+            avatar: user.avatar,
+            role: user.role
         };
         res.redirect('/users/profile');
         if (req.body.remember) {
